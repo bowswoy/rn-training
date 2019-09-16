@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, View, Image, Platform, FlatList} from 'react-native';
+import {Text, View, Image, Platform, FlatList, TouchableOpacity} from 'react-native';
 import {Icon} from 'react-native-elements';
 import MenuIcon from './MenuIcon';
 
@@ -15,8 +15,7 @@ const DATA = [
   },
   {
     id: 'f11a6abd34514be28258f71ba85b3696',
-    title:
-      'รีวิวเครปป้าเฉื่อย 10 เมนูคาวหวาน ไม่พลาดทั้งเมนูลับและเมนูฮิต!',
+    title: 'รีวิวเครปป้าเฉื่อย 10 เมนูคาวหวาน ไม่พลาดทั้งเมนูลับและเมนูฮิต!',
     thumbnail:
       'https://img.wongnai.com/p/400x0/2019/03/10/f11a6abd34514be28258f71ba85b3696.jpg',
     body:
@@ -24,8 +23,7 @@ const DATA = [
   },
   {
     id: '8e153b6d572e4bfa875d080ef8f2c2a5',
-    title:
-      'แจกสูตร 5 เมนูสุขภาพจากผักตามฤดูกาล ประโยชน์มากมาย อิ่มกายสบายพุง!',
+    title: 'แจกสูตร 5 เมนูสุขภาพจากผักตามฤดูกาล ประโยชน์มากมาย อิ่มกายสบายพุง!',
     thumbnail:
       'https://img.wongnai.com/p/400x0/2019/03/27/8e153b6d572e4bfa875d080ef8f2c2a5.jpg',
     body:
@@ -42,13 +40,27 @@ const DATA = [
 ];
 
 export default class HomeScreen extends Component {
+  _renderItem({item, index}) {
+    return (
+      <View key={index} style={{flex: 1, margin: 5, backgroundColor: '#eee', borderRadius: 10}}>
+        <TouchableOpacity onPress={() => this.props.navigation.navigate('View', {item: item})}>
+          <Image
+            source={{uri: item.thumbnail}}
+            style={{height: 100, borderTopLeftRadius: 10, borderTopRightRadius: 10}}
+          />
+        <Text numberOfLines={2} style={{padding: 10}}>{item.title}</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
+
   render() {
     return (
       <View
         style={{
           flex: 1,
           flexDirection: 'column',
-         marginTop: Platform.OS == 'ios' ? 45 : 0,
+          marginTop: Platform.OS == 'ios' ? 45 : 0,
         }}>
         <View>
           <Image
@@ -94,18 +106,18 @@ export default class HomeScreen extends Component {
           />
         </View>
 
-        <View style={{flex: 4}}>
-            <Text style={{fontSize: 22, fontWeight: 'bold', marginLeft: 15}}>Recommended Items</Text>
+        <View style={{flex: 4, marginLeft: 5, marginRight: 5}}>
+          <Text style={{fontSize: 22, fontWeight: 'bold', marginLeft: 5}}>
+            Recommended Items
+          </Text>
 
-            <FlatList
-              data={DATA}
-              renderItem={({ item }) => <Text>{item.title}</Text>}
-              keyExtractor={item => item.id}
-              horizontal={true}
-            />
-
+          <FlatList
+            data={DATA}
+            renderItem={object => this._renderItem(object)}
+            keyExtractor={item => item.id}
+            numColumns={2}
+          />
         </View>
-
       </View>
     );
   }
