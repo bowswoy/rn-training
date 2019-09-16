@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Image } from 'react-native';
 
 export default class ViewScreen extends Component {
   constructor(props) {
@@ -13,7 +13,15 @@ export default class ViewScreen extends Component {
 
     return (
       <View>
-        <Text>{item.title}</Text>
+        <Image source={{uri: item.thumbnail}} style={{height: 200}} />
+
+        <View style={{padding: 15}}>
+            <Text style={{fontSize: 22}}>{item.title}</Text>
+        </View>
+
+        <View style={{padding: 15}}>
+            <Text style={{fontSize: 18, lineHeight: 26}}>{item.body}</Text>
+        </View>
       </View>
     );
   }

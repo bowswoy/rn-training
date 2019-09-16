@@ -30,7 +30,7 @@ const MainNavigator = createStackNavigator({
   Detail: {
     screen: DetailScreen,
     navigationOptions: ({ navigation }) => ({
-      title: 'My Application',
+      title: navigation.state.params.title,
       headerStyle: {
         backgroundColor: '#0964c1',
       },
@@ -43,7 +43,7 @@ const MainNavigator = createStackNavigator({
   View: {
     screen: ViewScreen,
     navigationOptions: ({ navigation }) => ({
-      title: 'My Application',
+      title: navigation.state.params.item.title,
       headerStyle: {
         backgroundColor: '#0964c1',
       },

@@ -1,5 +1,12 @@
 import React, {Component} from 'react';
-import {Text, View, Image, Platform, FlatList, TouchableOpacity} from 'react-native';
+import {
+  Text,
+  View,
+  Image,
+  Platform,
+  FlatList,
+  TouchableOpacity,
+} from 'react-native';
 import {Icon} from 'react-native-elements';
 import MenuIcon from './MenuIcon';
 
@@ -42,13 +49,29 @@ const DATA = [
 export default class HomeScreen extends Component {
   _renderItem({item, index}) {
     return (
-      <View key={index} style={{flex: 1, margin: 5, backgroundColor: '#eee', borderRadius: 10}}>
-        <TouchableOpacity onPress={() => this.props.navigation.navigate('View', {item: item})}>
+      <View
+        key={index}
+        style={{
+          flex: 1,
+          margin: 5,
+          backgroundColor: '#eee',
+          borderRadius: 10,
+          width: 250,
+          height: 200,
+        }}>
+        <TouchableOpacity
+          onPress={() => this.props.navigation.navigate('View', {item: item})}>
           <Image
             source={{uri: item.thumbnail}}
-            style={{height: 100, borderTopLeftRadius: 10, borderTopRightRadius: 10}}
+            style={{
+              height: 140,
+              borderTopLeftRadius: 10,
+              borderTopRightRadius: 10,
+            }}
           />
-        <Text numberOfLines={2} style={{padding: 10}}>{item.title}</Text>
+          <Text numberOfLines={2} style={{padding: 10}}>
+            {item.title}
+          </Text>
         </TouchableOpacity>
       </View>
     );
@@ -83,7 +106,7 @@ export default class HomeScreen extends Component {
             iconColor="#f006"
             iconMenu="ร้านอาหาร"
             onPress={() =>
-              this.props.navigation.navigate('Detail', {page: 'restaurant'})
+              this.props.navigation.navigate('Detail', {page: 'restaurant', title: 'ร้านอาหาร'})
             }
           />
           <MenuIcon
@@ -115,7 +138,7 @@ export default class HomeScreen extends Component {
             data={DATA}
             renderItem={object => this._renderItem(object)}
             keyExtractor={item => item.id}
-            numColumns={2}
+            horizontal={true}
           />
         </View>
       </View>
