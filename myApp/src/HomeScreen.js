@@ -86,10 +86,13 @@ export default class HomeScreen extends Component {
           marginTop: Platform.OS == 'ios' ? 45 : 0,
         }}>
         <View>
-          <Image
-            source={require('./images/react-native.jpg')}
-            style={{width: '100%', height: 120}}
-          />
+          <TouchableOpacity
+            onPress={() => this.props.navigation.navigate('Contact')}>
+            <Image
+              source={require('./images/react-native.jpg')}
+              style={{width: '100%', height: 120}}
+            />
+          </TouchableOpacity>
         </View>
 
         <View
@@ -106,31 +109,53 @@ export default class HomeScreen extends Component {
             iconColor="#f006"
             iconMenu="ร้านอาหาร"
             onPress={() =>
-              this.props.navigation.navigate('Detail', {page: 'restaurant', title: 'ร้านอาหาร'})
+              this.props.navigation.navigate('Detail', {
+                page: 'restaurant',
+                title: 'ร้านอาหาร',
+                color: '#f006',
+              })
             }
           />
           <MenuIcon
             iconName="ios-cafe"
             iconColor="#00f6"
             iconMenu="ร้านกาแฟ"
-            onPress={() => this.props.navigation.navigate('Detail')}
+            onPress={() =>
+              this.props.navigation.navigate('Detail', {
+                page: 'cafe',
+                title: 'ร้านกาแฟ',
+                color: '#00f6',
+              })
+            }
           />
           <MenuIcon
             iconName="ios-camera"
             iconColor="#0006"
             iconMenu="ที่เที่ยว"
-            onPress={() => this.props.navigation.navigate('Detail')}
+            onPress={() =>
+              this.props.navigation.navigate('Detail', {
+                page: 'travel',
+                title: 'ที่เที่ยว',
+                color: '#0006',
+              })
+            }
           />
           <MenuIcon
             iconName="ios-happy"
             iconColor="#e79"
             iconMenu="บิวตี้"
-            onPress={() => this.props.navigation.navigate('Detail')}
+            onPress={() =>
+              this.props.navigation.navigate('Detail', {
+                page: 'beauty',
+                title: 'บิวตี้',
+                color: '#e79',
+              })
+            }
           />
         </View>
 
-        <View style={{flex: 4, marginLeft: 5, marginRight: 5}}>
-          <Text style={{fontSize: 22, fontWeight: 'bold', marginLeft: 5}}>
+        <View style={{ height: 250, marginLeft: 5, marginRight: 5, marginTop: 25}}>
+          <Text style={{fontSize: 22, fontWeight: 'bold', marginLeft: 5, marginBottom: 10}}>
             Recommended Items
           </Text>
 
@@ -139,8 +164,11 @@ export default class HomeScreen extends Component {
             renderItem={object => this._renderItem(object)}
             keyExtractor={item => item.id}
             horizontal={true}
+            showsHorizontalScrollIndicator={false}
           />
         </View>
+
+        <View style={{flex: 2}}></View>
       </View>
     );
   }
